@@ -172,10 +172,13 @@ def transform_task():
                 'longitude': data.get('jobLocation', {}).get('longitude', ''),
             },
         }
-        # Save transformed data into JSON files
-        if not filename.endswith('.json'):
-            filename = f'{filename}.json'
-        with open(f'staging/transformed/{filename}', 'w') as outfile:
+        # Nouveau nom du fichier transformé
+        output_filename = f'{filename.split(".")[0]}.json'
+            
+        # Sauvegardez les données transformées dans des fichiers JSON
+        output_file_path = os.path.join('staging/transformed', output_filename)
+            
+        with open(output_file_path, 'w') as outfile:
             json.dump(transformed_data, outfile, indent=2)
 
 
